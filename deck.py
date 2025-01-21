@@ -22,7 +22,13 @@ class Deck:
         if self.deck_type == "comum":
             suits = ['Copas', 'Ouro', 'Paus', 'Espadas']
             ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'J', 'Q', 'K']
-            return [f"{rank} de {suit}" for suit in suits for rank in ranks]
+            suit_emojis = {
+                "Copas": "♥️",  # Emoji de Copas
+                "Ouro": "♦️",    # Emoji de Ouro
+                "Paus": "♣️",    # Emoji de Paus
+                "Espadas": "♠️"  # Emoji de Espadas
+            }
+            return [f"{rank} de {suit_emojis[suit]}" for suit in suits for rank in ranks]
 
     def create_marselha_deck(self):
             arcana_maior = [
@@ -32,8 +38,15 @@ class Deck:
                 "O Diabo", "A Torre", "A Estrela", "A Lua", "O Sol", 
                 "O Julgamento", "O Mundo"
             ]
-            arcana_menor = [f"{rank} de {suit}" for suit in ['Copas', 'Ouro', 'Paus', 'Espadas'] 
-                            for rank in ['Ás', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valete', 'Rainha', 'Rei']]
+            suit_emojis = {
+                "Copas": "♥️",  # Emoji de Copas
+                "Ouro": "♦️",    # Emoji de Ouro
+                "Paus": "♣️",    # Emoji de Paus
+                "Espadas": "♠️"  # Emoji de Espadas
+            }
+            ranks = ['Ás', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Valete', 'Rainha', 'Rei']
+            arcana_menor = [f"{rank} de {suit_emojis[suit]}" for suit in ['Copas', 'Ouro', 'Paus', 'Espadas'] 
+                            for rank in ranks]
             return arcana_maior + arcana_menor
     
     def create_cigano_deck(self):
@@ -66,56 +79,64 @@ class Deck:
     def cards_meaning(self, card):
         """Return the meaning of a card."""
         meaning = {}
+
+        suits_emojis = {
+            'Copas': '♥️',
+            'Espadas': '♠️',
+            'Ouro': '♦️',
+            'Paus': '♣️'
+        }
+
         if self.deck_type == "comum":
             meaning = {
-                "A de Ouro": "Casa",
-                "2 de Ouro": "Viagem de Dia",
-                "3 de Ouro": "Recado Muito Bom",
-                "4 de Ouro": "Palavras de Amor Íntimo",
-                "5 de Ouro": "Dinheiro",
-                "6 de Ouro": "Dinheiro",
-                "7 de Ouro": "Certeza Muito Boa",
-                "8 de Ouro": "Mudança Boa",
-                "9 de Ouro": "Filho",
-                "J de Ouro": "(Pensamentos) Alemão",
-                "Q de Ouro": "Loira",
-                "K de Ouro": "Loiro",
-                "A de Copas": "Casa",
-                "2 de Copas": "Viagem de Dia",
-                "3 de Copas": "Recado Muito Bom",
-                "4 de Copas": "Palavras de Amor Fraterno",
-                "5 de Copas": "Felicidade",
-                "6 de Copas": "Falsidade / Engano",
-                "7 de Copas": "Certeza",
-                "8 de Copas": "Mudança",
-                "9 de Copas": "Filho",
-                "J de Copas": "(Pensamentos) Branco / Italiano",
-                "Q de Copas": "Branca",
-                "K de Copas": "Branco",
-                "A de Paus": "Fofoca",
-                "2 de Paus": "Viagem de Noite",
-                "3 de Paus": "Recado Ruim",
-                "4 de Paus": "Doença Passageira",
-                "5 de Paus": "Perca",
-                "6 de Paus": "Susto",
-                "7 de Paus": "Certeza",
-                "8 de Paus": "Choro",
-                "9 de Paus": "Fofoca",
-                "J de Paus": "(Pensamentos) Moreno Claro",
-                "Q de Paus": "Morena",
-                "K de Paus": "Moreno",
-                "A de Espadas": "Raiva",
-                "2 de Espadas": "Viagem de Noite",
-                "3 de Espadas": "Recado Ruim",
-                "4 de Espadas": "Doença Grave",
-                "5 de Espadas": "Feitiço",
-                "6 de Espadas": "Caixão",
-                "7 de Espadas": "Certeza Ruim",
-                "8 de Espadas": "Bebedeira / Festa",
-                "9 de Espadas": "Justiça",
-                "J de Espadas": "(Pensamentos) Preto",
-                "Q de Espadas": "Preta",
-                "K de Espadas": "Preto",
+                "A de ♦️": "Casa",
+                "2 de ♦️": "Viagem de Dia",
+                "3 de ♦️": "Recado Muito Bom",
+                "4 de ♦️": "Palavras de Amor Íntimo",
+                "5 de ♦️": "Dinheiro",
+                "6 de ♦️": "Dinheiro",
+                "7 de ♦️": "Certeza Muito Boa",
+                "8 de ♦️": "Mudança Boa",
+                "9 de ♦️": "Filho",
+                "J de ♦️": "(Pensamentos) Alemão",
+                "Q de ♦️": "Loira",
+                "K de ♦️": "Loiro",
+                "A de ♥️": "Casa",
+                "2 de ♥️": "Viagem de Dia",
+                "3 de ♥️": "Recado Muito Bom",
+                "4 de ♥️": "Palavras de Amor Fraterno",
+                "5 de ♥️": "Felicidade",
+                "6 de ♥️": "Falsidade / Engano",
+                "7 de ♥️": "Certeza",
+                "8 de ♥️": "Mudança",
+                "9 de ♥️": "Filho",
+                "J de ♥️": "(Pensamentos) Branco / Italiano",
+                "Q de ♥️": "Branca",
+                "K de ♥️": "Branco",
+                "A de ♣️": "Fofoca",
+                "2 de ♣️": "Viagem de Noite",
+                "3 de ♣️": "Recado Ruim",
+                "4 de ♣️": "Doença Passageira",
+                "5 de ♣️": "Perca",
+                "6 de ♣️": "Susto",
+                "7 de ♣️": "Certeza",
+                "8 de ♣️": "Choro",
+                "9 de ♣️": "Fofoca",
+                "J de ♣️": "(Pensamentos) Moreno Claro",
+                "Q de ♣️": "Morena",
+                "K de ♣️": "Moreno",
+                "A de ♠️": "Raiva",
+                "2 de ♠️": "Viagem de Noite",
+                "3 de ♠️": "Recado Ruim",
+                "4 de ♠️": "Doença Grave",
+                "5 de ♠️": "Feitiço",
+                "6 de ♠️": "Caixão",
+                "7 de ♠️": "Certeza Ruim",
+                "8 de ♠️": "Bebedeira / Festa",
+                "9 de ♠️": "Justiça",
+                "J de ♠️": "(Pensamentos) Preto",
+                "Q de ♠️": "Preta",
+                "K de ♠️": "Preto",
             }
 
         elif self.deck_type == "marselha":
@@ -133,7 +154,7 @@ class Deck:
                 "O Eremita": "Introspecção, busca interior, sabedoria, solidão.",
                 "A Roda da Fortuna": "Mudança, ciclos, sorte, destino.",
                 "A Força": "Coragem, paciência, autocontrole, compaixão.",
-                "O Enforcado": "Sacrifício, perspectiva, pausa, rendição.",
+                "O Enforcado": "Sacrifício, perspectiva, ♣️a, rendição.",
                 "A Morte": "Transformação, finais, novos começos, renascimento.",
                 "A Temperança": "Equilíbrio, moderação, harmonia, paciência.",
                 "O Diabo": "Apego, materialismo, tentação, repressão.",
@@ -144,66 +165,66 @@ class Deck:
                 "O Julgamento": "Renascimento, absolvição, decisão, despertar.",
                 "O Mundo": "Conclusão, realização, integridade, plenitude.",
                 
-                # Naipes - Copas, Espadas, Paus e Ouro
-                # Naipe de Copas
-                "Ás de Copas": "Novo amor, emoção, fertilidade.",
-                "2 de Copas": "Parceria, conexão, equilíbrio emocional.",
-                "3 de Copas": "Celebração, amizade, abundância.",
-                "4 de Copas": "Estagnação emocional, introspecção.",
-                "5 de Copas": "Decepção, perda emocional, arrependimento.",
-                "6 de Copas": "Nostalgia, memórias, bondade.",
-                "7 de Copas": "Ilusões, escolhas, fantasias.",
-                "8 de Copas": "Deixar ir, busca de propósito.",
-                "9 de Copas": "Satisfação emocional, realização de desejos.",
-                "10 de Copas": "Felicidade, harmonia familiar, plenitude.",
-                "Valete de Copas": "Mensagem emocional, novidade criativa.",
-                "Rainha de Copas": "Empatia, intuição, compaixão.",
-                "Rei de Copas": "Controle emocional, sabedoria emocional.",
+                # Naipes - ♥️, ♠️, ♣️ e ♦️
+                # Naipe de ♥️
+                "Ás de ♥️": "Novo amor, emoção, fertilidade.",
+                "2 de ♥️": "Parceria, conexão, equilíbrio emocional.",
+                "3 de ♥️": "Celebração, amizade, abundância.",
+                "4 de ♥️": "Estagnação emocional, introspecção.",
+                "5 de ♥️": "Decepção, perda emocional, arrependimento.",
+                "6 de ♥️": "Nostalgia, memórias, bondade.",
+                "7 de ♥️": "Ilusões, escolhas, fantasias.",
+                "8 de ♥️": "Deixar ir, busca de propósito.",
+                "9 de ♥️": "Satisfação emocional, realização de desejos.",
+                "10 de ♥️": "Felicidade, harmonia familiar, plenitude.",
+                "Valete de ♥️": "Mensagem emocional, novidade criativa.",
+                "Rainha de ♥️": "Empatia, intuição, compaixão.",
+                "Rei de ♥️": "Controle emocional, sabedoria emocional.",
                 
-                # Naipe de Espadas
-                "Ás de Espadas": "Verdades reveladas, clareza, decisão.",
-                "2 de Espadas": "Conflito, indecisão, equilíbrio entre opostos.",
-                "3 de Espadas": "Coração partido, dor emocional, traição.",
-                "4 de Espadas": "Descanso, recuperação, introspecção.",
-                "5 de Espadas": "Perda, conflito, vitória a qualquer custo.",
-                "6 de Espadas": "Viagem, transição, alívio, mudança.",
-                "7 de Espadas": "Engano, furtividade, dissimulação.",
-                "8 de Espadas": "Limitações, aprisionamento, falta de liberdade.",
-                "9 de Espadas": "Ansiedade, pesadelos, medo, preocupação.",
-                "10 de Espadas": "Fim de um ciclo doloroso, traição, colapso.",
-                "Valete de Espadas": "Curiosidade, mensagens, vigilância.",
-                "Rainha de Espadas": "Lógica, independência, sabedoria.",
-                "Rei de Espadas": "Autoridade intelectual, clareza mental, julgamento imparcial.",
+                # Naipe de ♠️
+                "Ás de ♠️": "Verdades reveladas, clareza, decisão.",
+                "2 de ♠️": "Conflito, indecisão, equilíbrio entre opostos.",
+                "3 de ♠️": "Coração partido, dor emocional, traição.",
+                "4 de ♠️": "Descanso, recuperação, introspecção.",
+                "5 de ♠️": "Perda, conflito, vitória a qualquer custo.",
+                "6 de ♠️": "Viagem, transição, alívio, mudança.",
+                "7 de ♠️": "Engano, furtividade, dissimulação.",
+                "8 de ♠️": "Limitações, aprisionamento, falta de liberdade.",
+                "9 de ♠️": "Ansiedade, pesadelos, medo, preocupação.",
+                "10 de ♠️": "Fim de um ciclo doloroso, traição, colapso.",
+                "Valete de ♠️": "Curiosidade, mensagens, vigilância.",
+                "Rainha de ♠️": "Lógica, independência, sabedoria.",
+                "Rei de ♠️": "Autoridade intelectual, clareza mental, julgamento imparcial.",
                 
-                # Naipe de Paus
-                "Ás de Paus": "Novos começos, inspiração, criatividade.",
-                "2 de Paus": "Planejamento, tomada de decisão, visão futura.",
-                "3 de Paus": "Expansão, visão de longo prazo, trabalho em equipe.",
-                "4 de Paus": "Estabilidade, celebração, harmonia.",
-                "5 de Paus": "Conflito, competição, desafios.",
-                "6 de Paus": "Vitória, reconhecimento, sucesso público.",
-                "7 de Paus": "Defesa, resistência, desafios a superar.",
-                "8 de Paus": "Velocidade, movimento rápido, progresso.",
-                "9 de Paus": "Perseverança, resistência, cuidado com os obstáculos.",
-                "10 de Paus": "Sobrecarregado, responsabilidade excessiva, fardo.",
-                "Valete de Paus": "Mensagem, novos começos, entusiasmo.",
-                "Rainha de Paus": "Confiança, carisma, criatividade.",
-                "Rei de Paus": "Liderança, inspiração, ação decisiva.",
+                # Naipe de ♣️
+                "Ás de ♣️": "Novos começos, inspiração, criatividade.",
+                "2 de ♣️": "Planejamento, tomada de decisão, visão futura.",
+                "3 de ♣️": "Expansão, visão de longo prazo, trabalho em equipe.",
+                "4 de ♣️": "Estabilidade, celebração, harmonia.",
+                "5 de ♣️": "Conflito, competição, desafios.",
+                "6 de ♣️": "Vitória, reconhecimento, sucesso público.",
+                "7 de ♣️": "Defesa, resistência, desafios a superar.",
+                "8 de ♣️": "Velocidade, movimento rápido, progresso.",
+                "9 de ♣️": "Perseverança, resistência, cuidado com os obstáculos.",
+                "10 de ♣️": "Sobrecarregado, responsabilidade excessiva, fardo.",
+                "Valete de ♣️": "Mensagem, novos começos, entusiasmo.",
+                "Rainha de ♣️": "Confiança, carisma, criatividade.",
+                "Rei de ♣️": "Liderança, inspiração, ação decisiva.",
                 
-                # Naipe de Ouro
-                "Ás de Ouro": "Novas oportunidades financeiras, abundância, prosperidade.",
-                "2 de Ouro": "Equilíbrio financeiro, adaptabilidade, mudanças.",
-                "3 de Ouro": "Trabalho em equipe, aprendizado, reconhecimento.",
-                "4 de Ouro": "Conservadorismo, segurança financeira, avareza.",
-                "5 de Ouro": "Perda, dificuldades financeiras, exclusão.",
-                "6 de Ouro": "Generosidade, ajuda mútua, caridade.",
-                "7 de Ouro": "Paciência, avaliação, retorno sobre investimento.",
-                "8 de Ouro": "Trabalho árduo, dedicação, aperfeiçoamento.",
-                "9 de Ouro": "Conquista material, segurança financeira.",
-                "10 de Ouro": "Herança, riqueza duradoura, estabilidade familiar.",
-                "Valete de Ouro": "Mensagem de prosperidade, novos negócios.",
-                "Rainha de Ouro": "Segurança material, nutrição, riqueza.",
-                "Rei de Ouro": "Sucesso financeiro, autoridade, estabilidade.",
+                # Naipe de ♦️
+                "Ás de ♦️": "Novas oportunidades financeiras, abundância, prosperidade.",
+                "2 de ♦️": "Equilíbrio financeiro, adaptabilidade, mudanças.",
+                "3 de ♦️": "Trabalho em equipe, aprendizado, reconhecimento.",
+                "4 de ♦️": "Conservadorismo, segurança financeira, avareza.",
+                "5 de ♦️": "Perda, dificuldades financeiras, exclusão.",
+                "6 de ♦️": "Generosidade, ajuda mútua, caridade.",
+                "7 de ♦️": "Paciência, avaliação, retorno sobre investimento.",
+                "8 de ♦️": "Trabalho árduo, dedicação, aperfeiçoamento.",
+                "9 de ♦️": "Conquista material, segurança financeira.",
+                "10 de ♦️": "Herança, riqueza duradoura, estabilidade familiar.",
+                "Valete de ♦️": "Mensagem de prosperidade, novos negócios.",
+                "Rainha de ♦️": "Segurança material, nutrição, riqueza.",
+                "Rei de ♦️": "Sucesso financeiro, autoridade, estabilidade.",
             }
 
         elif self.deck_type == "cigano":
@@ -245,6 +266,11 @@ class Deck:
                 "Âncora": "Estabilidade, perseverança, segurança.",
                 "Cruz": "Desafios, destino, aprendizado espiritual.",
             }
+        for suit, emoji in suits_emojis.items():
+            for key in meaning.keys():
+                if suit in key:
+                    meaning[key] = meaning[key].replace(suit, emoji)
+        
         return meaning.get(card, "Significado não encontrado.")
 
 
